@@ -2,6 +2,7 @@
 using EmbedIO.Routing;
 using EmbedIO.WebApi;
 using System;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,10 +28,15 @@ namespace CryptoAPI
         public async Task<string> Hash()
         {
             var p = await HttpContext.GetRequestDataAsync<JSON.HashData>();
-            byte[] data = Convert.FromBase64String(p.contents);
+
+            MemoryStream dataStream = new MemoryStream();
+            dataStream.Write(Convert.FromBase64String(p.contents));
+            if (!string.IsNullOrEmpty(p.salt)) dataStream.Write(Convert.FromBase64String(p.salt));
+            var data = dataStream.ToArray();
 
             var response = new JSON.HashData();
             response.method = p.method;
+            response.salt = p.salt;
 
             switch (p.method.ToLower())
             {

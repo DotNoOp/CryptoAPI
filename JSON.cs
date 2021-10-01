@@ -13,6 +13,7 @@ namespace CryptoAPI
         {
             public string method { get; set; }
             public string contents { get; set; }
+            public string? salt { get; set; }
 
             public HashData()
             {
