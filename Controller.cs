@@ -41,13 +41,16 @@ namespace CryptoAPI
                 case "sha128":
                     response.contents = Crypto.sha1(data);
                     break;
-                case "sha512":
-                    response.contents = Crypto.sha512(data);
-                    break;
                 case "sha2":
                 case "sha256":
                 default:
                     response.contents = Crypto.sha256(data);
+                    break;
+                case "sha384":
+                    response.contents = Crypto.sha384(data);
+                    break;
+                case "sha512":
+                    response.contents = Crypto.sha512(data);
                     break;
             }
 

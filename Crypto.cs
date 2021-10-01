@@ -20,6 +20,13 @@ namespace CryptoAPI
                 return BitConverter.ToString(m.ComputeHash(v)).ToLower().Replace("-", "");
             }
         }
+        public static string sha384(byte[] v)
+        {
+            using (SHA384 m = SHA384.Create())
+            {
+                return BitConverter.ToString(m.ComputeHash(v)).ToLower().Replace("-", "");
+            }
+        }
         public static string sha1(byte[] v)
         {
             using (SHA1 m = SHA1.Create())
