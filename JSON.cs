@@ -13,6 +13,21 @@ namespace CryptoAPI
         {
             public string method { get; set; }
             public string contents { get; set; }
+
+            public HashData()
+            {
+
+            }
+            public HashData(string method, string contents)
+            {
+                this.method = method;
+                this.contents = contents;
+            }
+        }
+
+        public static string Build(object o)
+        {
+            return JsonConvert.SerializeObject(o);
         }
     }
 }

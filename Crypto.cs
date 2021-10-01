@@ -13,5 +13,26 @@ namespace CryptoAPI
                 return BitConverter.ToString(m.ComputeHash(v)).ToLower().Replace("-", "");
             }
         }
+        public static string md5(byte[] v)
+        {
+            using (MD5 m = MD5.Create())
+            {
+                return BitConverter.ToString(m.ComputeHash(v)).ToLower().Replace("-", "");
+            }
+        }
+        public static string sha1(byte[] v)
+        {
+            using (SHA1 m = SHA1.Create())
+            {
+                return BitConverter.ToString(m.ComputeHash(v)).ToLower().Replace("-", "");
+            }
+        }
+        public static string sha512(byte[] v)
+        {
+            using (SHA512 m = SHA512.Create())
+            {
+                return BitConverter.ToString(m.ComputeHash(v)).ToLower().Replace("-", "");
+            }
+        }
     }
 }
