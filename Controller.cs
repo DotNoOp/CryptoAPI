@@ -1,10 +1,6 @@
 ﻿using EmbedIO;
 using EmbedIO.Routing;
 using EmbedIO.WebApi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,15 +25,7 @@ namespace CryptoAPI
         [Route(EmbedIO.HttpVerbs.Get, "/{val?}")]
         public async Task<string> Hash(string val)
         {
-            return md5(val);
-        }
-
-        public static string md5(string v)
-        {
-            using (MD5 m = MD5.Create())
-            {
-                return BitConverter.ToString(m.ComputeHash(Encoding.UTF8.GetBytes(v))).ToLower().Replace("-", "");
-            }
+            return Crypto.sha256(val);
         }
     }
 }
