@@ -1,6 +1,7 @@
 ﻿using EmbedIO;
 using EmbedIO.Routing;
 using EmbedIO.WebApi;
+using System;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,10 +23,12 @@ namespace CryptoAPI
             await text.WriteAsync((string)data).ConfigureAwait(false);
         }
 
-        [Route(EmbedIO.HttpVerbs.Get, "/{val?}")]
+        [Route(EmbedIO.HttpVerbs.Post, "/")]
         public async Task<string> Hash(string val)
         {
-            return Crypto.sha256(val);
+            var p = await HttpContext.GetRequestDataAsync<JSON.HashData>();
+
+            return Crypto.sha256(Convert.FromBase64String(p.contents));
         }
     }
 }
