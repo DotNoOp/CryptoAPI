@@ -7,15 +7,17 @@ namespace CryptoAPI
 {
     class Program
     {
+        public static Config cfg = new Config("cfg.json");
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine($"-> Starting the server up at {cfg.url}...");
 
-            CreateWebServer("http://127.0.0.1:80/").RunAsync();
+            CreateWebServer(cfg.url).RunAsync();
 
             while (true)
             {
-                Thread.Sleep(100);
+                Thread.Sleep(10000);
             }
         }
 
