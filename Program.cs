@@ -27,7 +27,7 @@ namespace CryptoAPI
                     .WithUrlPrefix(url)
                     .WithMode(HttpListenerMode.EmbedIO))
                 .WithCors()
-                .WithWebApi("/", Controller.AsText, m => m
+                .WithWebApi("/", Controller.AsJSON, m => m
                     .WithController<Controller>());
 
             return server;
