@@ -1,6 +1,7 @@
 ﻿using EmbedIO;
 using EmbedIO.WebApi;
 using System;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -23,11 +24,13 @@ namespace CryptoAPI
             while (true)
             {
                 var client = tcp.AcceptTcpClient();
-            }
+                var ns = client.GetStream();
 
-            while (true)
-            {
-                Thread.Sleep(10000);
+                var sw = new StreamWriter(ns); sw.AutoFlush = true;
+                var sr = new StreamReader(ns);
+
+                string str = sr.ReadLine();
+                sw.WriteLine(Crypto.sha256(str));
             }
         }
 
