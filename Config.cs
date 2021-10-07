@@ -14,7 +14,7 @@ namespace CryptoAPI
 
         public bool enableTCP = true;
 
-        public string tcpConnection = "127.0.0.1:22";
+        public string tcpConnection = "127.0.0.1:6631";
 
         #region Service functions
         public static Config LoadConfig(string filepath)
