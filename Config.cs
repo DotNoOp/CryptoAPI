@@ -12,6 +12,7 @@ namespace CryptoAPI
     {
         public string url = "http://127.0.0.1:80/";
 
+        #region Service functions
         public static Config LoadConfig(string filepath)
         {
             if (File.Exists(filepath))
@@ -39,5 +40,6 @@ namespace CryptoAPI
         {
             this.url = LoadConfig(filepath).url;
         }
+        #endregion
     }
 }

@@ -6,6 +6,7 @@ namespace CryptoAPI
 {
     class Crypto
     {
+        #region Hashing algorithms
         public static string sha256(byte[] v)
         {
             using (SHA256 m = SHA256.Create())
@@ -41,5 +42,6 @@ namespace CryptoAPI
                 return BitConverter.ToString(m.ComputeHash(v)).ToLower().Replace("-", "");
             }
         }
+        #endregion
     }
 }
