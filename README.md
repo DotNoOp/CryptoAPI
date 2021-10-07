@@ -15,3 +15,6 @@ Salting is done by hashing "`contents`+`salt`". If no salt is provided, no salt 
 To encrypt a string, send JSON object `{"method":"tripledes","contents":"GLx1fqaOq8Q0DIHaKsLuTg==","key":"gxdgIWcYqrtoqRaFgxdgIWcYqrtoqRaF","operation":true}`
 where method is one of supported methods: tripledes, aes256. Both contents and key are base64 encoded byte array, and `operation` should be `true` for encryption and `false` for decryption.
 Server will reply with a JSON object `{"method": "tripledes","contents": "rQLz7KeFyhbtngQALm8kZQ==","salt": null,"key": "gxdgIWcYqrtoqRaFgxdgIWcYqrtoqRaF","operation": true,"dataLen": 16}`, where `method` will be the method you've chosen and `contents` will contain base64 string representation of encrypted content. Other fields will remain unchanged. `dataLen` shows the length of initial byte array passed as contents.
+
+### Over TCP
+Exactly the same as HTTP, but you connect to address defined in config and send your JSON object with `\r\n` appended to it. Server will reply accordingly, with a JSON object.
