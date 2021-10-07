@@ -12,6 +12,10 @@ namespace CryptoAPI
     {
         public string url = "http://127.0.0.1:80/";
 
+        public bool enableTCP = true;
+
+        public string tcpConnection = "127.0.0.1:22";
+
         #region Service functions
         public static Config LoadConfig(string filepath)
         {

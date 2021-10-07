@@ -1,6 +1,8 @@
 ﻿using EmbedIO;
 using EmbedIO.WebApi;
 using System;
+using System.Net;
+using System.Net.Sockets;
 using System.Threading;
 
 namespace CryptoAPI
@@ -14,6 +16,14 @@ namespace CryptoAPI
             Console.WriteLine($"-> Starting the server up at {cfg.url}...");
 
             CreateWebServer(cfg.url).RunAsync();
+
+            var tcp = new TcpListener(IPEndPoint.Parse(cfg.tcpConnection));
+            tcp.Start();
+
+            while (true)
+            {
+                var client = tcp.AcceptTcpClient();
+            }
 
             while (true)
             {
