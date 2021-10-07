@@ -37,6 +37,9 @@ namespace CryptoAPI
             var response = new JSON.HashData();
             response.method = p.method;
             response.salt = p.salt;
+            response.key = p.key;
+            response.operation = p.operation;
+            response.dataLen = data.Length;
 
             switch (p.method.ToLower())
             {
@@ -62,6 +65,10 @@ namespace CryptoAPI
                 //encryption
                 case "aes256":
                     response.contents = Crypto.aes256(data, Convert.FromBase64String(p.key), p.operation);
+                    break;
+                case "tripledes":
+                case "tdes":
+                    response.contents = Crypto.TDES(data, Convert.FromBase64String(p.key), p.operation);
                     break;
             }
 

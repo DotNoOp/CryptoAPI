@@ -34,6 +34,10 @@ namespace CryptoAPI
             /// Only used if method is encryption, null otherwise. True for encrypt, false for decrypt.
             /// </summary>
             public bool? operation { get; set; }
+            /// <summary>
+            /// Only used for responses. Shows the initial length of encrypted data. Requires for decryption later. Just a quality-of-life feature.
+            /// </summary>
+            public long dataLen { get; set; }
 
             public HashData()
             {

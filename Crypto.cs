@@ -75,6 +75,40 @@ namespace CryptoAPI
                 return Convert.ToBase64String(resultArray);
             }
         }
+
+        public static string TDES(byte[] v, byte[] key, bool? operation)
+        {
+            var K = key.ToList();
+            while (K.Count < 24)
+            {
+                K.Add(0x00);
+            }
+            key = K.ToArray();
+
+            TripleDESCryptoServiceProvider tdes = new TripleDESCryptoServiceProvider()
+            {
+                Key = key,
+                Mode = CipherMode.ECB,
+                Padding = PaddingMode.Zeros
+            };
+
+            if (!operation.HasValue) operation = true;
+
+            if ((bool)operation)
+            {
+                var enc = tdes.CreateEncryptor();
+                byte[] resultArray = enc.TransformFinalBlock(v, 0, v.Length);
+                tdes.Clear();
+                return Convert.ToBase64String(resultArray);
+            }
+            else
+            {
+                var dec = tdes.CreateDecryptor();
+                byte[] resultArray = dec.TransformFinalBlock(v, 0, v.Length);
+                tdes.Clear();
+                return Convert.ToBase64String(resultArray);
+            }
+        }
         #endregion
     }
 }
