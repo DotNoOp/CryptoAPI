@@ -40,6 +40,7 @@ namespace CryptoAPI
 
             switch (p.method.ToLower())
             {
+                //hashing
                 case "md5":
                     response.contents = Crypto.md5(data);
                     break;
@@ -57,6 +58,10 @@ namespace CryptoAPI
                     break;
                 case "sha512":
                     response.contents = Crypto.sha512(data);
+                    break;
+                //encryption
+                case "aes256":
+                    response.contents = Crypto.aes256(data, Convert.FromBase64String(p.key), p.operation);
                     break;
             }
 

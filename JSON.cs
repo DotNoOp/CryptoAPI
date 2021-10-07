@@ -10,13 +10,30 @@ namespace CryptoAPI
     class JSON
     {
         /// <summary>
-        /// This class is used for both request and response and contains hashing method, salt and data (either raw for request or processed for response).
+        /// This class is used for both request and response and is used for client-server communication.
         /// </summary>
         public class HashData
         {
+            /// <summary>
+            /// Method. Some methods are hashing algorithms, some are encryption algorithms.
+            /// </summary>
             public string method { get; set; }
+            /// <summary>
+            /// Base64 representation of contents.
+            /// </summary>
             public string contents { get; set; }
+            /// <summary>
+            /// Only used if method is hashing, null otherwise. Base64 representation of salt.
+            /// </summary>
             public string? salt { get; set; }
+            /// <summary>
+            /// Only used if method is encryption, null otherwise. Base64 representation of a key.
+            /// </summary>
+            public string? key { get; set; }
+            /// <summary>
+            /// Only used if method is encryption, null otherwise. True for encrypt, false for decrypt.
+            /// </summary>
+            public bool? operation { get; set; }
 
             public HashData()
             {
