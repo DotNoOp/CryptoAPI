@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
 using System.Security.Cryptography;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CryptoAPI
 {
@@ -40,6 +42,37 @@ namespace CryptoAPI
             using (SHA512 m = SHA512.Create())
             {
                 return BitConverter.ToString(m.ComputeHash(v)).ToLower().Replace("-", "");
+            }
+        }
+        #endregion
+
+        #region Encryption algorithms
+        public static string aes256(byte[] v, byte[] key, bool? operation)
+        {
+            var provider = new AesCryptoServiceProvider
+            {
+                KeySize = 256,
+                BlockSize = 128,
+                Key = key,
+                Padding = PaddingMode.None,
+                Mode = CipherMode.ECB
+            };
+
+            if (!operation.HasValue) operation = true;
+
+            if ((bool)operation)
+            {
+                var enc = provider.CreateEncryptor();
+                List<byte> te = v.ToList();
+                while (te.Count % 16 != 0) te.Add(0x00);
+                v = te.ToArray();
+                byte[] resultArray = enc.TransformFinalBlock(v, 0, v.Length);
+                return Convert.ToBase64String(resultArray);
+            } else
+            {
+                var dec = provider.CreateDecryptor();
+                byte[] resultArray = dec.TransformFinalBlock(v, 0, v.Length);
+                return Convert.ToBase64String(resultArray);
             }
         }
         #endregion
