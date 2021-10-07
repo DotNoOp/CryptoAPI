@@ -9,6 +9,9 @@ namespace CryptoAPI
 {
     class JSON
     {
+        /// <summary>
+        /// This class is used for both request and response and contains hashing method, salt and data (either raw for request or processed for response).
+        /// </summary>
         public class HashData
         {
             public string method { get; set; }
@@ -26,6 +29,11 @@ namespace CryptoAPI
             }
         }
 
+        /// <summary>
+        /// This function builds a JSON string out of object
+        /// </summary>
+        /// <param name="o">Object to build a JSON string out of</param>
+        /// <returns>JSON string</returns>
         public static string Build(object o)
         {
             return JsonConvert.SerializeObject(o);
