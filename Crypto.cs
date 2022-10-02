@@ -3,6 +3,7 @@ using System.Text;
 using System.Security.Cryptography;
 using System.Collections.Generic;
 using System.Linq;
+using Flawless2;
 
 namespace CryptoAPI
 {
@@ -107,6 +108,25 @@ namespace CryptoAPI
                 byte[] resultArray = dec.TransformFinalBlock(v, 0, v.Length);
                 tdes.Clear();
                 return Convert.ToBase64String(resultArray);
+            }
+        }
+
+        public static string Flawless(byte[] v, string key, bool? operation)
+        {
+            var flawless = new FlawlessAlgo();
+            flawless.InitialKey = key;
+
+            if (!operation.HasValue) operation = true;
+
+            if ((bool)operation)
+            {
+                var enc = flawless.Encrypt(v).ToArray();
+                return Convert.ToBase64String(enc);
+            }
+            else
+            {
+                var dec = flawless.Decrypt(v).ToArray();
+                return Convert.ToBase64String(dec);
             }
         }
         #endregion
