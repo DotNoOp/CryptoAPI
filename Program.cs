@@ -11,7 +11,7 @@ namespace CryptoAPI
 {
     class Program
     {
-        public static Config cfg = new Config("cfg.json");
+        public static Config cfg = Config.LoadConfig("cfg.json");
 
         static void Main(string[] args)
         {
