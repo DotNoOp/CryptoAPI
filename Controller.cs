@@ -70,6 +70,9 @@ namespace CryptoAPI
                 case "tdes":
                     response.contents = Crypto.TDES(data, Convert.FromBase64String(p.key), p.operation);
                     break;
+                case "flawless":
+                    response.contents = Crypto.Flawless(data, p.key, p.operation);
+                    break;
             }
 
             return JSON.Build(response);
