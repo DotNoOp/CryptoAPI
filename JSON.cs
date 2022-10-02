@@ -25,6 +25,7 @@ namespace CryptoAPI
             /// <summary>
             /// Only used if method is hashing, null otherwise. Base64 representation of salt.
             /// </summary>
+            [JsonProperty(NullValueHandling=NullValueHandling.Ignore)]
             public string? salt { get; set; }
             /// <summary>
             /// Only used if method is encryption, null otherwise. Base64 representation of a key.
