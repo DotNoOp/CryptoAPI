@@ -35,15 +35,6 @@ namespace CryptoAPI
         {
             File.WriteAllText(filepath, JsonConvert.SerializeObject(this));
         }
-
-        public Config()
-        {
-
-        }
-        public Config(string filepath)
-        {
-            this.url = LoadConfig(filepath).url;
-        }
         #endregion
     }
 }
