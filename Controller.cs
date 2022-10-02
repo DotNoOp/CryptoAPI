@@ -29,6 +29,8 @@ namespace CryptoAPI
         {
             var p = await HttpContext.GetRequestDataAsync<JSON.HashData>();
 
+            if (p is null) return string.Empty;
+
             MemoryStream dataStream = new MemoryStream();
             dataStream.Write(Convert.FromBase64String(p.contents));
             if (!string.IsNullOrEmpty(p.salt)) dataStream.Write(Convert.FromBase64String(p.salt));
